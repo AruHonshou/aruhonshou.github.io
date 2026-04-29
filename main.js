@@ -281,7 +281,41 @@ const APP = (() => {
 
         let messages = [];
         let lastMsgTime = 0;
+        let welcomeSent = false;   // mensaje de bienvenida solo 1 vez
+        let tooltipHidden = false; // tooltip solo se muestra 1 vez
 
+        function hideTooltip() {
+            tooltipHidden = true;
+            const tooltip = document.getElementById('chat-tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(8px)';
+                setTimeout(() => tooltip.style.display = 'none', 300);
+            }
+        }
+
+        function openChat() {
+            // Ocultar tooltip al abrir
+            hideTooltip();
+
+            const win = document.getElementById('chat-window');
+            win.classList.toggle('hidden');
+
+            // Mensaje de bienvenida solo la primera vez que se abre
+            if (!welcomeSent && !win.classList.contains('hidden')) {
+                welcomeSent = true;
+                setTimeout(() => {
+                    appendMessage('assistant', currentLang === 'es'
+                        ? '¡Hola! Soy Aru, la asistente virtual de Kendall 👋 ¿Qué te gustaría saber sobre él? 😊'
+                        : "Hi! I'm Aru, Kendall's virtual assistant 👋 What would you like to know about him? 😊");
+                }, 400);
+            }
+
+            const input = document.getElementById('chat-input');
+            if (input && !win.classList.contains('hidden')) input.focus();
+        }
+
+        // toggle sigue existiendo para el botón X de cerrar
         function toggle() {
             document.getElementById('chat-window').classList.toggle('hidden');
         }
@@ -357,7 +391,7 @@ const APP = (() => {
             container.scrollTop = container.scrollHeight;
         }
 
-        return { toggle, sendMessage };
+        return { toggle, openChat, hideTooltip, sendMessage };
     })();
 
     /* ═══════════ INIT ═══════════ */

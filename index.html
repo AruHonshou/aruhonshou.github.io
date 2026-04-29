@@ -433,12 +433,24 @@
   </footer>
 
   <!-- ═══ CHATBOT FAB ═══ -->
-  <button id="chat-fab" class="chat-fab" aria-label="Abrir chat con IA" onclick="APP.chatbot.toggle()">
-    <span class="chat-fab-icon">💬</span>
+  <!-- Tooltip burbuja — aparece una sola vez -->
+  <div id="chat-tooltip" class="chat-tooltip" onclick="APP.chatbot.openChat()">
+    <span class="chat-tooltip-dot"></span>
+    <span class="chat-tooltip-text">¡Habla con Aru, mi asistente! ✨</span>
+    <button class="chat-tooltip-close" onclick="event.stopPropagation();APP.chatbot.hideTooltip()" aria-label="Cerrar">×</button>
+  </div>
+  <button id="chat-fab" class="chat-fab" aria-label="Abrir chat con Aru" onclick="APP.chatbot.openChat()">
+    <img src="images/456751.webp" class="chat-fab-avatar" alt="Aru"/>
   </button>
   <div id="chat-window" class="chat-window hidden" role="dialog" aria-label="Chat con asistente IA">
     <div class="chat-header">
-      <span>🤖 Kendall IA Assistant</span>
+      <div class="chat-header-info">
+        <img src="images/456751.webp" class="chat-header-avatar" alt="Aru"/>
+        <div>
+          <div class="chat-header-name">Aru</div>
+          <div class="chat-header-status">Asistente de Kendall</div>
+        </div>
+      </div>
       <button class="chat-close" onclick="APP.chatbot.toggle()" aria-label="Cerrar chat">✕</button>
     </div>
     <div id="chat-messages" class="chat-messages"></div>
