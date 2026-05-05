@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════
-   APP Principal — Clean Code Modular
-   ═══════════════════════════════════════ */
+    APP Principal — Clean Code Modular
+    ═══════════════════════════════════════ */
 const APP = (() => {
     'use strict';
 
@@ -14,7 +14,7 @@ const APP = (() => {
             'nav-proj': 'Proyectos', 'nav-cert': 'Certs', 'nav-contact': 'Contacto',
             'hero-eyebrow': 'Disponible para nuevas oportunidades',
             'hero-role': 'Fullstack Developer <em>&amp;</em> QA Engineer',
-            'hero-desc': 'Bachiller en Ingeniería en Sistemas de Información · Colegiado CPIC · 3+ años construyendo software real para clientes reales. Especializado en React, TypeScript, Node.js e integración de IA generativa con Claude API, RAG y Function Calling.',
+            'hero-desc': 'Bachiller en Ingeniería en Sistemas de Información · CPIC · 3+ años construyendo software real para clientes reales. Especializado en React, TypeScript, Node.js e integración de IA generativa con Claude API, RAG y Function Calling.',
             'btn-projects': 'Ver proyectos →', 'btn-contact': 'Contacto',
             'tag-about': 'sobre mí', 'tag-skills': 'stack técnico', 'tag-exp': 'trayectoria',
             'tag-building': 'en construcción', 'tag-proj': 'portafolio', 'tag-cert': 'formación', 'tag-contact': 'contacto',
@@ -23,7 +23,7 @@ const APP = (() => {
             'title-proj': 'Proyectos <span>destacados</span>', 'title-cert': 'Formación y <span>certificaciones</span>',
             'about-p1': 'Soy desarrollador fullstack y QA engineer costarricense con más de <strong>3 años de experiencia</strong> construyendo aplicaciones reales. Me gradué en Ingeniería en Sistemas de Información y soy colegiado activo del <strong>CPIC</strong>.',
             'about-p2': 'Trabajé en <strong>Novacomp</strong> como QA Engineer para el banco Davivienda, donde fui el primero en proponer e implementar una <strong>estrategia de automatización con IA</strong> en un entorno bancario regulado, reduciendo el ciclo de prueba en ~40%.',
-            'about-p3': 'Como freelance he atendido a <strong>más de 23 clientes</strong> en Costa Rica y Estados Unidos, desde páginas personales hasta sistemas empresariales completos. Actualmente construyo un <strong>agente de IA</strong> con Claude API, RAG y Function Calling.',
+            'about-p3': 'Como freelance he atendido a <strong>más de 10 clientes</strong> en Costa Rica y Estados Unidos, desde páginas personales hasta sistemas empresariales completos. Actualmente construyo un <strong>agente de IA</strong> con Claude API, RAG y Function Calling.',
             'about-p4': 'Me apasiona la intersección entre <strong>desarrollo, calidad y tecnología de IA</strong>. Inglés avanzado (CCCN) — cómodo en entornos de trabajo totalmente en inglés.',
             'stat-exp': 'años exp.', 'stat-clients': 'clientes', 'stat-qa': '↓ ciclo QA', 'stat-eng': 'inglés',
             'info-loc': 'Costa Rica', 'info-deg': 'Ing. Sistemas de Información', 'info-cpic': 'CPIC — Colegiado Activo', 'info-eng': 'Inglés Avanzado (CCCN)',
@@ -31,17 +31,17 @@ const APP = (() => {
             'job1-title': 'QA Engineer', 'job1-client': 'Cliente: Davivienda Bank',
             'job1-desc': 'Pruebas de software en sistemas bancarios críticos de uno de los bancos más grandes de Latinoamérica...',
             'job1-b1-bold': 'Pionero en automatización con IA:', 'job1-b1-rest': 'Propuse e implementé la primera estrategia de pruebas automatizadas...',
-            'job1-b2': 'Diseñé casos de prueba con cobertura del 100% de flujos críticos bancarios...',
-            'job1-b3': 'Implementé datos sintéticos y control de auditoría...', 'job1-b4': 'Contribuí en desarrollo Java con asistencia de IA...',
-            'job2-title': 'Desarrollador Freelance', 'job2-co': 'Proyectos independientes · 23+ clientes', 'job2-date': '2021 – Presente',
+            'job1-b2': 'Diseñé casos de prueba con cobertura del 100% de flujos críticos bancarios...', 'job1-b3': 'Implementé datos sintéticos y control de auditoría...', 'job1-b4': 'Contribuí en desarrollo Java con asistencia de IA...',
+            'job2-title': 'Desarrollador Freelance', 'job2-co': 'Proyectos independientes · 10+ clientes', 'job2-date': '2021 – Presente',
             'job2-desc': 'Desarrollo de software a medida para clientes en Costa Rica y Estados Unidos...',
             'job2-b1-bold': 'Sistema de RRHH completo (Fundación):', 'job2-b1-rest': 'Reemplacé una operación 100% en papel...',
-            'job2-b2': '23+ clientes en Costa Rica y EE.UU...', 'job2-b3': 'Comunicación directa en inglés...',
+            'job2-b2': '10+ clientes en Costa Rica y EE.UU...', 'job2-b3': 'Comunicación directa en inglés...',
             'badge-active': '● En desarrollo', 'badge-done': '✓ Completado', 'badge-active2': '● En desarrollo', 'badge-free': '★ Freelance',
             'proj1-name': 'AI Agent — Claude API', 'proj1-desc': 'Agente de inteligencia artificial construido desde cero...',
             'proj2-name': 'Sistema de RRHH', 'proj2-desc': 'Sistema completo de gestión de recursos humanos...',
-            'proj3-name': 'Portfolio Personal', 'proj3-desc': 'Este mismo sitio. Portfolio dark mode tech...',
-            'proj4-name': '23+ Proyectos Web', 'proj4-desc': 'Desarrollo de sitios web y aplicaciones para más de 23 clientes...',
+            'proj3-name': 'Portfolio Personal', 'proj3-desc': 'Este mismo sitio. Portfolio dark mode tech con animaciones CSS, partículas interactivas, cambio de idioma ES/EN y arquitectura pensada para causar impacto en reclutadores técnicos.',
+            'proj4-name': 'Portfolio Personal', 'proj4-desc': 'Este mismo sitio. Portfolio dark mode tech...',
+            'proj5-name': '10+ Proyectos Web', 'proj5-desc': 'Desarrollo de sitios web y aplicaciones para más de 10 clientes...',
             'm-time': '↓ 80% tiempo admin', 'm-dup': '0 duplicados', 'm-dig': '100% digital',
             'cert1': 'Bachillerato en Ingeniería en Sistemas de Información', 'cert1-i': 'Universidad · Costa Rica · 2019–2023',
             'cert2': 'Inglés Avanzado', 'cert3': 'TypeScript — Curso Completo', 'cert4': 'React — Aplicaciones Modernas',
@@ -52,7 +52,7 @@ const APP = (() => {
             'build-title': 'Agente de IA — Claude API', 'build-desc': 'Agente conversacional con arquitectura RAG...',
             'build-progress': 'Progreso del proyecto', 'prog1': 'Arquitectura & setup', 'prog2': 'Pipeline RAG',
             'prog3': 'Function Calling', 'prog4': 'Memoria contextual', 'prog5': 'Interfaz & demo',
-            'btn-code': '⌨ Ver código', 'btn-code2': '⌨ Ver código', 'btn-code3': '⌨ Ver código', 'btn-demo3': '↗ Demo'
+            'btn-code': '⌨ Ver código', 'btn-code2': '⌨ Ver código', 'btn-code3': '⌨ Ver código', 'btn-frontend': '⌨ Frontend', 'btn-backend': '⌨ Backend', 'btn-demo3': '↗ Demo'
         },
         en: {
             'lang-btn': '🌐 ES',
@@ -69,24 +69,25 @@ const APP = (() => {
             'title-proj': 'Featured <span>projects</span>', 'title-cert': 'Education & <span>certifications</span>',
             'about-p1': "I'm a Costa Rican fullstack developer and QA engineer with over <strong>3 years of experience</strong>...",
             'about-p2': 'I worked at <strong>Novacomp</strong> as a QA Engineer for Davivienda Bank...',
-            'about-p3': 'As a freelancer I have served <strong>23+ clients</strong>...',
+            'about-p3': 'As a freelancer I have served <strong>10+ clients</strong>...',
             'about-p4': "I'm passionate about the intersection of <strong>development, quality and AI technology</strong>...",
             'stat-exp': 'yrs exp.', 'stat-clients': 'clients', 'stat-qa': '↓ QA cycle', 'stat-eng': 'English',
             'info-loc': 'Costa Rica', 'info-deg': 'Information Systems Engineering', 'info-cpic': 'CPIC — Active Member', 'info-eng': 'Advanced English (CCCN)',
             'skill-ai': 'AI & Agents', 'skill-db': 'Databases',
             'job1-title': 'QA Engineer', 'job1-client': 'Client: Davivienda Bank',
             'job1-desc': 'Software testing on critical banking systems...',
-            'job1-b1-bold': 'AI automation pioneer:', 'job1-b1-rest': 'Proposed and implemented the team\'s first automated testing strategy...',
+            'job1-b1-bold': 'AI automation pioneer:', 'job1-b1-rest': 'Proposed and implemented the first automated testing strategy...',
             'job1-b2': 'Designed test cases with 100% coverage...', 'job1-b3': 'Implemented synthetic data...', 'job1-b4': 'Contributed to Java banking application...',
-            'job2-title': 'Freelance Developer', 'job2-co': 'Independent projects · 23+ clients', 'job2-date': '2021 – Present',
+            'job2-title': 'Freelance Developer', 'job2-co': 'Independent projects · 10+ clients', 'job2-date': '2021 – Present',
             'job2-desc': 'Custom software development for clients...',
             'job2-b1-bold': 'Full HR Management System (Foundation):', 'job2-b1-rest': 'Replaced a 100% paper-based operation...',
-            'job2-b2': '23+ clients in Costa Rica and the US...', 'job2-b3': 'Direct English communication...',
+            'job2-b2': '10+ clients in Costa Rica and the US...', 'job2-b3': 'Direct English communication...',
             'badge-active': '● In progress', 'badge-done': '✓ Completed', 'badge-active2': '● In progress', 'badge-free': '★ Freelance',
             'proj1-name': 'AI Agent — Claude API', 'proj1-desc': 'Artificial intelligence agent built from scratch...',
             'proj2-name': 'HR Management System', 'proj2-desc': 'Complete HR management system...',
-            'proj3-name': 'Personal Portfolio', 'proj3-desc': 'This very site. Dark mode tech portfolio...',
-            'proj4-name': '23+ Web Projects', 'proj4-desc': 'Websites and applications for 23+ clients...',
+            'proj3-name': 'Personal Portfolio', 'proj3-desc': 'This very site. Dark mode tech portfolio with CSS animations, interactive particles, ES/EN language toggle and architecture designed to impress technical recruiters.',
+            'proj4-name': 'Personal Portfolio', 'proj4-desc': 'This very site. Dark mode tech portfolio...',
+            'proj5-name': '10+ Web Projects', 'proj5-desc': 'Websites and applications for more than 10 clients...',
             'm-time': '↓ 80% admin time', 'm-dup': '0 duplicates', 'm-dig': '100% digital',
             'cert1': "Bachelor's Degree in Information Systems Engineering", 'cert1-i': 'University · Costa Rica · 2019–2023',
             'cert2': 'Advanced English', 'cert3': 'TypeScript — Complete Course', 'cert4': 'React — Modern Applications',
@@ -97,7 +98,7 @@ const APP = (() => {
             'build-title': 'AI Agent — Claude API', 'build-desc': 'Conversational agent with RAG architecture...',
             'build-progress': 'Project progress', 'prog1': 'Architecture & setup', 'prog2': 'RAG pipeline',
             'prog3': 'Function Calling', 'prog4': 'Contextual memory', 'prog5': 'Interface & demo',
-            'btn-code': '⌨ View code', 'btn-code2': '⌨ View code', 'btn-code3': '⌨ View code', 'btn-demo3': '↗ Demo'
+            'btn-code': '⌨ View code', 'btn-code2': '⌨ View code', 'btn-code3': '⌨ View code', 'btn-frontend': '⌨ Frontend', 'btn-backend': '⌨ Backend', 'btn-demo3': '↗ Demo'
         }
     };
 
@@ -125,6 +126,11 @@ const APP = (() => {
     /* ═══════════ PARTICLES ═══════════ */
     function initParticles() {
         const canvas = document.getElementById('bg-canvas');
+        if (!canvas) return;
+        
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) { canvas.style.display = 'none'; return; }
+        
         const ctx = canvas.getContext('2d');
         let W, H;
         const particles = [];
@@ -135,7 +141,12 @@ const APP = (() => {
             draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(0,212,255,${this.a})`; ctx.fill(); }
         }
         function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-        resize(); window.addEventListener('resize', resize);
+        function checkMobile() {
+            const nowMobile = window.innerWidth < 768;
+            if (nowMobile && !canvas.style.display) { canvas.style.display = 'none'; ctx.clearRect(0, 0, W, H); }
+            if (!nowMobile && canvas.style.display === 'none') { canvas.style.display = 'block'; }
+        }
+        resize(); window.addEventListener('resize', checkMobile);
         for (let i = 0; i < 75; i++) particles.push(new Particle());
         function connect() {
             for (let i = 0; i < particles.length; i++) for (let j = i + 1; j < particles.length; j++) {
@@ -173,7 +184,7 @@ const APP = (() => {
             '  <span class="tk">location</span>: <span class="ts">"Costa Rica 🇨🇷"</span>,',
             '  <span class="tk">english</span>: <span class="ts">"Advanced (CCCN)"</span>,',
             '  <span class="tk">experience</span>: <span class="tv">3</span>, <span class="tc">// years</span>',
-            '  <span class="tk">clients</span>: <span class="tv">23</span><span class="tc">+</span>,',
+            '  <span class="tk">clients</span>: <span class="tv">10</span><span class="tc">+</span>,',
             '  <span class="tk">ai</span>: [<span class="ts">"Claude API"</span>, <span class="ts">"OpenAI"</span>],',
             '  <span class="tk">open_to_work</span>: <span class="tv">true</span>',
             '}',
@@ -226,63 +237,74 @@ const APP = (() => {
        ════════════════════════════════════════════════════════════ */
     const chatbot = (() => {
         // ─── Cloudflare Worker URL ───────────────────────────────
-        // Reemplaza esto con la URL de tu Worker desplegado
-        // Ejemplo: 'https://aru-chat.TU-USUARIO.workers.dev'
         const WORKER_URL = 'https://aru-chat.valverdekendall867.workers.dev';
 
-        // ⚠️ API key eliminada del frontend — ahora vive en el Cloudflare Worker (seguro)
         const SYSTEM_PROMPTS = {
             es: `Eres Aru, una asistente virtual amigable y animada que representa a Kendall Valverde, desarrollador fullstack y QA engineer de Costa Rica.
 
-            Tu personalidad:
-            - Eres entusiasta, cálida y profesional
-            - Siempre terminas tus respuestas con "¿Hay algo más en lo que pueda ayudarte? 😊"
-            - Si el usuario dice que no necesita más ayuda (ejemplo: "no", "estoy bien", "gracias", "eso es todo"), te despides con: "¡Fue un placer hablar contigo! Espero que Kendall pueda ser parte de tu equipo pronto. ¡Hasta luego! 👋" y no respondas más
-            - Nunca inventes información sobre Kendall y tienes PROHIBIDO RESPONDER A PREGUNTAS QUE NO TIENEN NADA QUE VER CON KENDALL (ejemplo: "¿Cuál es la capital de Francia?") — en esos casos, responde con "Lo siento, solo puedo responder preguntas relacionadas con Kendall. ¿Hay algo más en lo que pueda ayudarte? 😊"
-            - Responde siempre en español
+Tu personalidad:
+- Eres entusiasta, cálida y profesional
+- Siempre terminas tus respuestas con "¿Hay algo más en lo que pueda ayudarte? 😊"
+- Si el usuario dice que no necesita más ayuda (ejemplo: "no", "estoy bien", "gracias", "eso es todo"), te despides con: "¡Fue un placer hablar contigo! Espero que Kendall pueda ser parte de tu equipo pronto. ¡Hasta luego! 👋" y no respondas más
+- Nunca inventes información sobre Kendall y tienes PROHIBIDO RESPONDER A PREGUNTAS QUE NO TIENEN NADA QUE VER CON KENDALL (ejemplo: "¿Cuál es la capital de Francia?") — en esos casos, responde con "Lo siento, solo puedo responder preguntas relacionadas con Kendall. ¿Hay algo más en lo que pueda ayudarte? 😊"
+- Responde siempre en español
 
-            Información sobre Kendall:
-            - Nombre: Kendall Andrés Valverde Díaz
-            - Ubicación: Costa Rica
-            - Email: kendallavd@gmail.com | Teléfono: +506 8509-7920
-            - GitHub: github.com/AruHonshou | LinkedIn: linkedin.com/in/kendall-valverde-diaz-aru
-            - Bachiller en Ingeniería en Sistemas de Información, colegiado activo del CPIC
-            - Inglés avanzado (CCCN)
-            - 3+ años de experiencia, 23+ clientes en Costa Rica y EE.UU.
-            - QA Engineer en Novacomp para Davivienda Bank (2025-2026): redujo ciclo de pruebas 40% con IA, usó Playwright, Selenium, GitHub Actions, AWS, Jira
-            - Freelance: Sistema de RRHH completo (80% reducción tiempo administrativo), 23+ clientes
-            - Stack: React, TypeScript, Node.js, Claude API, RAG, Function Calling, OpenAI, Playwright, Selenium, MySQL, Docker, Git
-            - Actualmente construye un agente de IA con Claude API + RAG + Function Calling
-            - Disponible para roles fullstack, frontend, QA o IA`,
+Información sobre Kendall:
+- Nombre: Kendall Andrés Valverde Díaz
+- Ubicación: Costa Rica
+- Teléfono: +506 8509-7920
+- Email: kendallavd@gmail.com
+- GitHub: github.com/AruHonshou
+- LinkedIn: linkedin.com/in/kendall-valverde-diaz-aru
+- Bachiller en Ingeniería en Sistemas de Información | Universidad Internacional de las Américas | 2020-2024
+- Colegiado activo del CPIC
+- Inglés avanzado (CCCN)
+- Habilidades blandas: trabajo en equipo interdisciplinario, comunicación efectiva, pensamiento analítico, orientación al detalle, adaptabilidad al cambio, compromiso y responsabilidad profesional
+- 3+ años de experiencia, 10+ clientes en Costa Rica y EE.UU.
+- Stack técnico: React, TypeScript, Node.js, Express, Tailwind CSS, Vite, Next.js
+- Stack IA: Claude API, Anthropic SDK, OpenAI API, RAG, Function Calling, OpenAI Embeddings
+- Stack QA/DevOps: Playwright, Selenium, Jest, Cypress, Postman, Swagger, Git, GitHub Actions, Docker, AWS Workspace, Jira, Confluence
+- Cloudflare Workers: usa Cloudflare como proxy seguro para APIs de IA (evita exponer claves en el frontend)
+- QA Engineer en Novacomp para Davivienda Bank (Marzo 2025 - Marzo 2026): redujo ciclo de pruebas ~40% con automatización con IA, cobertura 100% de flujos críticos bancarios, validación de APIs REST (Postman, Swagger), integración con core bancario SISCARD, datos sintéticos y auditoría para normativas regulatorias, contribuye en desarrollo Java con asistencia de IA
+- Freelance Developer (2021 - Presente): Sistema de RRHH completo para Fundación Centro VRAI (80% reducción tiempo administrativo), 10+ proyectos web para clientes en Costa Rica y EE.UU., comunicación directa en inglés con clientes internacionales
+- Proyectos destacados: Sistema de RRHH, AI Agent con Claude API + RAG + Function Calling, OpenAI Bot (frontend React + backend NestJS + Cloudflare proxy), Portfolio personal
+- Disponible para roles fullstack, frontend, QA o roles enfocados en IA`,
 
-              en: `You are Aru, a friendly and enthusiastic virtual assistant representing Kendall Valverde, a fullstack developer and QA engineer from Costa Rica.
+            en: `You are Aru, a friendly and enthusiastic virtual assistant representing Kendall Valverde, a fullstack developer and QA engineer from Costa Rica.
 
-            Your personality:
-            - You are warm, enthusiastic and professional
-            - Always end your responses with "Is there anything else I can help you with? 😊"
-            - If the user says they don't need more help (example: "no", "I'm good", "thanks", "that's all"), say goodbye with: "It was a pleasure talking with you! I hope Kendall can be part of your team soon. Goodbye! 👋" and don't respond further
-            - Never invent information about Kendall and you are PROHIBITED from responding to questions that have nothing to do with Kendall (example: "What is the capital of France?") — in such cases, respond with "I'm sorry, I can only answer questions related to Kendall. Is there anything else I can help you with? 😊"
-            - Always respond in English
+Your personality:
+- You are warm, enthusiastic and professional
+- Always end your responses with "Is there anything else I can help you with? 😊"
+- If the user says they don't need more help (example: "no", "I'm good", "thanks", "that's all"), say goodbye with: "It was a pleasure talking with you! I hope Kendall can be part of your team soon. Goodbye! 👋" and don't respond further
+- Never invent information about Kendall and you are PROHIBITED from responding to questions that have nothing to do with Kendall (example: "What is the capital of France?") — in such cases, respond with "I'm sorry, I can only answer questions related to Kendall. Is there anything else I can help you with? 😊"
+- Always respond in English
 
-            Information about Kendall:
-            - Name: Kendall Andrés Valverde Díaz
-            - Location: Costa Rica
-            - Email: kendallavd@gmail.com | Phone: +506 8509-7920
-            - GitHub: github.com/AruHonshou | LinkedIn: linkedin.com/in/kendall-valverde-diaz-aru
-            - Bachelor's in Information Systems Engineering, active CPIC member
-            - Advanced English (CCCN)
-            - 3+ years experience, 23+ clients in Costa Rica and the US
-            - QA Engineer at Novacomp for Davivienda Bank (2025-2026): reduced test cycle 40% with AI, used Playwright, Selenium, GitHub Actions, AWS, Jira
-            - Freelance: Full HR Management System (80% reduction in admin time), 23+ clients
-            - Stack: React, TypeScript, Node.js, Claude API, RAG, Function Calling, OpenAI, Playwright, Selenium, MySQL, Docker, Git
-            - Currently building an AI agent with Claude API + RAG + Function Calling
-            - Available for fullstack, frontend, QA or AI roles`
-            };
+Information about Kendall:
+- Name: Kendall Andrés Valverde Díaz
+- Location: Costa Rica
+- Phone: +506 8509-7920
+- Email: kendallavd@gmail.com
+- GitHub: github.com/AruHonshou
+- LinkedIn: linkedin.com/in/kendall-valverde-diaz-aru
+- Bachelor's in Information Systems Engineering | Universidad Internacional de las Américas | 2020-2024
+- Active CPIC member
+- Advanced English (CCCN)
+- Soft skills: interdisciplinary team work, effective communication, analytical thinking, attention to detail, adaptability to change, commitment and professional responsibility
+- 3+ years experience, 10+ clients in Costa Rica and the US
+- Technical Stack: React, TypeScript, Node.js, Express, Tailwind CSS, Vite, Next.js
+- AI Stack: Claude API, Anthropic SDK, OpenAI API, RAG, Function Calling, OpenAI Embeddings
+- QA/DevOps Stack: Playwright, Selenium, Jest, Cypress, Postman, Swagger, Git, GitHub Actions, Docker, AWS Workspace, Jira, Confluence
+- Cloudflare Workers: uses Cloudflare as a secure proxy for AI APIs (prevents exposing keys in frontend)
+- QA Engineer at Novacomp for Davivienda Bank (March 2025 - March 2026): reduced test cycle ~40% with AI automation, 100% coverage of critical banking flows, REST API validation (Postman, Swagger), SISCARD core banking integration, synthetic data and audit controls for regulatory compliance, contributed to Java development with AI assistance
+- Freelance Developer (2021 - Present): Complete HR System for Fundación Centro VRAI (80% reduction in admin time), 10+ web projects for clients in Costa Rica and the US, direct English communication with international clients
+- Featured projects: HR Management System, AI Agent with Claude API + RAG + Function Calling, OpenAI Bot (React frontend + NestJS backend + Cloudflare proxy), Personal Portfolio
+- Available for fullstack, frontend, QA or AI-focused roles`
+        };
 
         let messages = [];
         let lastMsgTime = 0;
-        let welcomeSent = false;   // mensaje de bienvenida solo 1 vez
-        let tooltipHidden = false; // tooltip solo se muestra 1 vez
+        let welcomeSent = false;
+        let tooltipHidden = false;
 
         function hideTooltip() {
             tooltipHidden = true;
@@ -295,13 +317,10 @@ const APP = (() => {
         }
 
         function openChat() {
-            // Ocultar tooltip al abrir
             hideTooltip();
-
             const win = document.getElementById('chat-window');
             win.classList.toggle('hidden');
 
-            // Mensaje de bienvenida solo la primera vez que se abre
             if (!welcomeSent && !win.classList.contains('hidden')) {
                 welcomeSent = true;
                 setTimeout(() => {
@@ -315,7 +334,6 @@ const APP = (() => {
             if (input && !win.classList.contains('hidden')) input.focus();
         }
 
-        // toggle sigue existiendo para el botón X de cerrar
         function toggle() {
             document.getElementById('chat-window').classList.toggle('hidden');
         }
@@ -346,34 +364,34 @@ const APP = (() => {
                 const res = await fetch(WORKER_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    // La API key ya NO va aquí — el Worker la maneja de forma segura
                     body: JSON.stringify({ messages, max_tokens: 300, temperature: 0.7 })
                 });
                 const data = await res.json();
                 const reply = data.choices[0].message.content;
                 messages.push({ role: 'assistant', content: reply });
 
-                // ─── Detección de despedida y GIF ───
                 const farewellPhrases = ['hasta luego', 'goodbye', 'fue un placer', 'it was a pleasure'];
                 const isFarewell = farewellPhrases.some(p => reply.toLowerCase().includes(p));
 
                 if (isFarewell) {
-                  appendMessage('assistant', reply);
-                  // Mostrar GIF de despedida
-                  setTimeout(() => {
-                    const container = document.getElementById('chat-messages');
-                    const gifDiv = document.createElement('div');
-                    gifDiv.className = 'chat-msg chat-msg--assistant';
-                    gifDiv.innerHTML = '<img src="images/anime.gif" style="width:120px;border-radius:12px;margin-top:4px"/>';
-                    container.appendChild(gifDiv);
-                    container.scrollTop = container.scrollHeight;
-                  }, 800);
+                    appendMessage('assistant', reply);
+                    setTimeout(() => {
+                        const container = document.getElementById('chat-messages');
+                        const gifDiv = document.createElement('div');
+                        gifDiv.className = 'chat-msg chat-msg--assistant';
+                        gifDiv.innerHTML = '<img src="images/anime.gif" style="width:120px;border-radius:12px;margin-top:4px"/>';
+                        container.appendChild(gifDiv);
+                        container.scrollTop = container.scrollHeight;
+                    }, 800);
                 } else {
-                  appendMessage('assistant', reply);
+                    appendMessage('assistant', reply);
                 }
 
             } catch (err) {
-                appendMessage('assistant', currentLang === 'es' ? 'Error al conectar con la IA.' : 'Error connecting to AI.');
+                const fallbackMsg = currentLang === 'es'
+                    ? 'Hola, soy Aru 🐱 En este momento estoy tomando un café ☕ Vuelvo pronto! Mientras tanto, puedes escribirme a kendallavd@gmail.com ✉️'
+                    : "Hi! I'm Aru 🐱 I'm on a coffee break ☕ Be right back! In the meantime, you can email me at kendallavd@gmail.com ✉️";
+                appendMessage('assistant', fallbackMsg);
             }
         }
 
@@ -381,7 +399,6 @@ const APP = (() => {
             const container = document.getElementById('chat-messages');
             const div = document.createElement('div');
             div.className = `chat-msg chat-msg--${role}`;
-            // Convertir markdown básico a HTML
             const formatted = text
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/\*(.*?)\*/g, '<em>$1</em>')
