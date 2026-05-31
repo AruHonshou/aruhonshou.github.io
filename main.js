@@ -116,28 +116,47 @@ const APP = (() => {
         }
     };
 
+    /**
+     * Aplica las traducciones del idioma seleccionado a todos los elementos
+     * con atributo [data-key] y restaura los pares bold+rest de experiencia.
+     * @param {'es'|'en'} lang - Código de idioma
+     */
     function applyLang(lang) {
         currentLang = lang;
         document.documentElement.lang = lang;
-        document.getElementById('lang-btn').textContent = T[lang]['lang-btn'];
+        const langBtn = document.getElementById('lang-btn');
+        if (langBtn) langBtn.textContent = T[lang]['lang-btn'];
+
         const navKeys = ['nav-about', 'nav-skills', 'nav-exp', 'nav-proj', 'nav-cert', 'nav-contact'];
-        document.querySelectorAll('.nav-links a').forEach((a, i) => { if (navKeys[i]) a.textContent = T[lang][navKeys[i]]; });
+        document.querySelectorAll('.nav-links a').forEach((a, i) => {
+            if (navKeys[i] && T[lang][navKeys[i]]) a.textContent = T[lang][navKeys[i]];
+        });
+
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.dataset.key;
             if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
         });
+
         const splitPairs = [['job1-b1-bold', 'job1-b1-rest'], ['job2-b1-bold', 'job2-b1-rest']];
         splitPairs.forEach(([bk, rk]) => {
             const bEl = document.querySelector(`[data-key="${bk}"]`);
             const rEl = document.querySelector(`[data-key="${rk}"]`);
-            if (bEl && rEl) bEl.closest('li').innerHTML = `<strong>${T[lang][bk]}</strong> ${T[lang][rk]}`;
+            if (bEl && rEl && T[lang][bk] && T[lang][rk]) {
+                const li = bEl.closest('li');
+                if (li) li.innerHTML = `<strong>${T[lang][bk]}</strong> ${T[lang][rk]}`;
+            }
         });
         updateProgressBarsLang(lang);
     }
 
+    /** Alterna entre español e inglés */
     function toggleLang() { applyLang(currentLang === 'es' ? 'en' : 'es'); }
 
-    /* ═══════════ PARTICLES ═══════════ */
+    /**
+     * Inicializa el canvas de partículas animadas en el fondo.
+     * Se desactiva automáticamente en dispositivos móviles (< 768px)
+     * para ahorrar batería y rendimiento.
+     */
     function initParticles() {
         const canvas = document.getElementById('bg-canvas');
         if (!canvas) return;
@@ -172,7 +191,11 @@ const APP = (() => {
         loop();
     }
 
-    /* ═══════════ SCROLL EFFECTS ═══════════ */
+    /**
+     * Inicializa efectos de scroll:
+     * - Resalta el link de navegación correspondiente a la sección visible
+     * - Activa animaciones reveal con IntersectionObserver
+     */
     function initScrollEffects() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-links a');
@@ -185,7 +208,10 @@ const APP = (() => {
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
 
-    /* ═══════════ TERMINAL ═══════════ */
+    /**
+     * Anima la terminal del Hero con efecto typewriter.
+     * Cada línea aparece secuencialmente con opacidad y desplazamiento.
+     */
     function initTerminal() {
         const body = document.getElementById('terminal-body');
         if (!body) return;
@@ -214,7 +240,11 @@ const APP = (() => {
         });
     }
 
-    /* ═══════════ PROGRESS BARS ═══════════ */
+    /**
+     * Renderiza las barras de progreso del proyecto en construcción
+     * con etiquetas traducidas según el idioma actual.
+     * @param {'es'|'en'} lang - Código de idioma
+     */
     function updateProgressBarsLang(lang) {
         const list = document.getElementById('progress-list');
         if (!list) return;
@@ -228,12 +258,14 @@ const APP = (() => {
         list.innerHTML = items.map(i => `
       <div class="progress-item">
         <div class="progress-label">
-          <span class="progress-name">${T[lang][i.key]}</span>
+          <span class="progress-name">${T[lang][i.key] || i.key}</span>
           <span class="progress-pct">${i.pct}%</span>
         </div>
         <div class="progress-bar"><div class="progress-fill ${i.cls}" data-width="${i.pct}"></div></div>
       </div>
     `).join('');
+        const card = document.getElementById('building-card');
+        if (!card) return;
         const obs = new IntersectionObserver(entries => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
@@ -242,16 +274,26 @@ const APP = (() => {
                 }
             });
         }, { threshold: .3 });
-        obs.observe(document.getElementById('building-card'));
+        obs.observe(card);
     }
 
     /* ═══════════ CHATBOT IA — DeepSeek via Cloudflare Worker ═══════════
        La API key de DeepSeek vive en el Worker (nunca en el navegador).
        El frontend solo llama al Worker, que actúa de proxy seguro.
+
+       Flujo:
+         1. Usuario escribe mensaje → se sanitiza antes de mostrar
+         2. Mensaje se envía al Worker (proxy seguro, API key en backend)
+         3. Worker reenvía a DeepSeek y devuelve respuesta
+         4. Respuesta se formatea (markdown → HTML) y muestra
+         5. En caso de error: fallback amigable sin exponer detalles técnicos
        ════════════════════════════════════════════════════════════ */
     const chatbot = (() => {
-        // ─── Cloudflare Worker URL ───────────────────────────────
+        /** URL del Cloudflare Worker que actúa como proxy seguro hacia DeepSeek API */
         const WORKER_URL = 'https://aru-chat.valverdekendall867.workers.dev';
+
+        /** Tiempo mínimo entre mensajes (ms) para prevenir spam accidental */
+        const RATE_LIMIT_MS = 6000;
 
         const SYSTEM_PROMPTS = {
             es: `Eres Aru, una asistente virtual amigable y animada que representa a Kendall Valverde, Software Engineer especializado en AI-Augmented Development de Costa Rica.
@@ -332,19 +374,40 @@ Information about Kendall:
         let welcomeSent = false;
         let tooltipHidden = false;
 
+        /**
+         * Escapa caracteres HTML para prevenir XSS en contenido dinámico.
+         * Solo debe usarse con contenido generado por el usuario.
+         * @param {string} str - Texto a sanitizar
+         * @returns {string} Texto seguro para insertar en innerHTML
+         */
+        function sanitizeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        /**
+         * Oculta el tooltip flotante del chatbot con animación.
+         * Se ejecuta al abrir el chat o hacer clic en el botón de cierre.
+         */
         function hideTooltip() {
             tooltipHidden = true;
             const tooltip = document.getElementById('chat-tooltip');
             if (tooltip) {
                 tooltip.style.opacity = '0';
                 tooltip.style.transform = 'translateY(8px)';
-                setTimeout(() => tooltip.style.display = 'none', 300);
+                setTimeout(() => { if (tooltip) tooltip.style.display = 'none'; }, 300);
             }
         }
 
+        /**
+         * Abre/cierra la ventana del chatbot.
+         * En la primera apertura, muestra el mensaje de bienvenida.
+         */
         function openChat() {
             hideTooltip();
             const win = document.getElementById('chat-window');
+            if (!win) return;
             win.classList.toggle('hidden');
 
             if (!welcomeSent && !win.classList.contains('hidden')) {
@@ -360,12 +423,20 @@ Information about Kendall:
             if (input && !win.classList.contains('hidden')) input.focus();
         }
 
+        /** Alterna visibilidad de la ventana del chat */
         function toggle() {
-            document.getElementById('chat-window').classList.toggle('hidden');
+            const win = document.getElementById('chat-window');
+            if (win) win.classList.toggle('hidden');
         }
 
+        /**
+         * Envía el mensaje del usuario al chatbot.
+         * Incluye rate limiting (6s entre mensajes), sanitización de input,
+         * gestión del contexto de conversación y fallback en caso de error.
+         */
         async function sendMessage() {
             const input = document.getElementById('chat-input');
+            if (!input) return;
             const text = input.value.trim();
             if (!text) return;
 
@@ -373,10 +444,10 @@ Information about Kendall:
             input.value = '';
 
             const now = Date.now();
-            if (now - lastMsgTime < 6000) {
+            if (now - lastMsgTime < RATE_LIMIT_MS) {
                 appendMessage('assistant', currentLang === 'es'
-                    ? '¡Hola! Soy Aru, la asistente virtual de Kendall 👋 ¿Qué te gustaría saber sobre él? 😊'
-                    : 'Hi! I\'m Aru, Kendall\'s virtual assistant 👋 What would you like to know about him? 😊');
+                    ? '¡Espera un momento! ⏳ Solo puedes enviar un mensaje cada 6 segundos. ¿Hay algo más en lo que pueda ayudarte? 😊'
+                    : 'Hold on! ⏳ You can send one message every 6 seconds. Is there anything else I can help you with? 😊');
                 return;
             }
             lastMsgTime = now;
@@ -392,7 +463,17 @@ Information about Kendall:
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ messages, max_tokens: 300, temperature: 0.7 })
                 });
+
+                if (!res.ok) {
+                    throw new Error(`Worker responded with ${res.status}`);
+                }
+
                 const data = await res.json();
+
+                if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+                    throw new Error('Unexpected API response structure');
+                }
+
                 const reply = data.choices[0].message.content;
                 messages.push({ role: 'assistant', content: reply });
 
@@ -403,9 +484,14 @@ Information about Kendall:
                     appendMessage('assistant', reply);
                     setTimeout(() => {
                         const container = document.getElementById('chat-messages');
+                        if (!container) return;
                         const gifDiv = document.createElement('div');
                         gifDiv.className = 'chat-msg chat-msg--assistant';
-                        gifDiv.innerHTML = '<img src="images/anime.gif" style="width:120px;border-radius:12px;margin-top:4px"/>';
+                        const img = document.createElement('img');
+                        img.src = 'images/anime.gif';
+                        img.style.cssText = 'width:120px;border-radius:12px;margin-top:4px';
+                        img.alt = 'Goodbye';
+                        gifDiv.appendChild(img);
                         container.appendChild(gifDiv);
                         container.scrollTop = container.scrollHeight;
                     }, 800);
@@ -414,6 +500,7 @@ Information about Kendall:
                 }
 
             } catch (err) {
+                console.error('Chatbot error:', err.message);
                 const fallbackMsg = currentLang === 'es'
                     ? 'Hola, soy Aru 🐱 En este momento estoy tomando un café ☕ Vuelvo pronto! Mientras tanto, puedes escribirme a kendallavd@gmail.com ✉️'
                     : "Hi! I'm Aru 🐱 I'm on a coffee break ☕ Be right back! In the meantime, you can email me at kendallavd@gmail.com ✉️";
@@ -421,15 +508,30 @@ Information about Kendall:
             }
         }
 
+        /**
+         * Añade un mensaje al contenedor del chat.
+         * Los mensajes del usuario se sanitizan (textContent).
+         * Los mensajes del asistente permiten formato markdown básico (negrita, cursiva).
+         * @param {'user'|'assistant'} role - Rol del mensaje
+         * @param {string} text - Contenido del mensaje
+         */
         function appendMessage(role, text) {
             const container = document.getElementById('chat-messages');
+            if (!container) return;
             const div = document.createElement('div');
             div.className = `chat-msg chat-msg--${role}`;
-            const formatted = text
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/\n/g, '<br>');
-            div.innerHTML = formatted;
+
+            if (role === 'user') {
+                div.textContent = text;
+            } else {
+                const sanitized = sanitizeHTML(text);
+                const formatted = sanitized
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/\n/g, '<br>');
+                div.innerHTML = formatted;
+            }
+
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
         }
@@ -437,7 +539,11 @@ Information about Kendall:
         return { toggle, openChat, hideTooltip, sendMessage };
     })();
 
-    /* ═══════════ INIT ═══════════ */
+    /**
+     * Punto de entrada principal.
+     * Inicializa todos los subsistemas: partículas, scroll, terminal,
+     * barras de progreso e i18n en español por defecto.
+     */
     function init() {
         initParticles();
         initScrollEffects();
