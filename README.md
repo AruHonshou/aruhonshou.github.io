@@ -1,50 +1,69 @@
-# Kendall Valverde Portfolio
+<h1 align="center">Aru.Dev · Kendall Valverde</h1>
 
-Portfolio personal de Kendall Valverde con estetica de terminal IA, asistente Aru integrado, secciones de experiencia, proyectos, certificaciones y contacto.
+<p align="center">
+  <strong>AI-assisted portfolio with a terminal OS aesthetic.</strong><br />
+  Built to present my profile, projects and experience through Aru, my personal AI assistant.
+</p>
 
-## Stack
+<p align="center">
+  <a href="https://aruhonshou.github.io"><strong>Live Portfolio</strong></a>
+  ·
+  <a href="mailto:kendallavd@gmail.com">Contact</a>
+  ·
+  <a href="https://github.com/AruHonshou">GitHub</a>
+</p>
 
-- HTML5
-- CSS3
-- JavaScript vanilla
-- Cloudflare Worker como proxy seguro para el chat de Aru
-- GitHub Pages para publicacion
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-0b1220?style=for-the-badge&logo=html5&logoColor=00d4ff" alt="HTML5" />
+  <img src="https://img.shields.io/badge/CSS3-0b1220?style=for-the-badge&logo=css3&logoColor=00d4ff" alt="CSS3" />
+  <img src="https://img.shields.io/badge/JavaScript-0b1220?style=for-the-badge&logo=javascript&logoColor=00ff9d" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/GitHub_Pages-0b1220?style=for-the-badge&logo=github&logoColor=ffffff" alt="GitHub Pages" />
+</p>
 
-## Estructura
+---
 
-```txt
-index.html      Estructura principal del sitio
-styles.css      Sistema visual, responsive y animaciones
-main.js         i18n, animaciones, chatbot y eventos de UI
-images/         Avatar de Aru y recursos visuales
-```
+## Concept
 
-## Desarrollo local
-
-Puedes abrir `index.html` directamente o servir el directorio con un servidor estatico:
-
-```bash
-npx serve .
-```
-
-## Publicacion
-
-El sitio esta preparado para GitHub Pages desde la rama `main` del repositorio:
+This portfolio is designed as an **AI terminal interface** where Aru loads and presents Kendall's professional profile.
 
 ```txt
-https://aruhonshou.github.io
+> aru profile --load kendall --mode=recruiter
+OK profile loaded successfully
+
+assistant: online
+memory.sync -> experience, projects, stack
+ready: ask Aru about Kendall
 ```
 
-## Seguridad y mantenimiento
+## Highlights
 
-- Los enlaces externos usan `rel="noopener noreferrer"`.
-- La API key del modelo no vive en el frontend; el navegador llama a un Worker.
-- El chat sanitiza mensajes antes de renderizarlos.
-- El cambio de idioma reinicia el contexto local del chat para evitar mezclar prompts ES/EN.
-- Hay soporte para `prefers-reduced-motion`.
+- Terminal-style hero with boot animation.
+- Aru AI assistant integrated as part of the site's identity.
+- ES/EN language switch.
+- Interactive particles and motion effects.
+- Responsive layout for desktop and mobile.
+- Secure chat flow through a Cloudflare Worker proxy.
 
-## Contacto
+## Project Files
 
-- Email: kendallavd@gmail.com
-- GitHub: https://github.com/AruHonshou
-- LinkedIn: https://www.linkedin.com/in/kendall-valverde-diaz-aru/
+```txt
+index.html   Site structure
+styles.css   Visual system, responsive layout and animations
+main.js      Language switch, UI events, particles and Aru chat
+images/      Aru avatar and visual assets
+```
+
+## Live
+
+<p>
+  <a href="https://aruhonshou.github.io">
+    <img src="https://img.shields.io/badge/Open_Portfolio-00d4ff?style=for-the-badge&logo=githubpages&logoColor=0b1220" alt="Open Portfolio" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <strong>Built by Kendall Valverde</strong><br />
+  Software Engineer · AI-Augmented Development
+</p>

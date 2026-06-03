@@ -183,7 +183,8 @@ const APP = (() => {
         if (!canvas) return;
         
         const isMobile = window.innerWidth < 768;
-        if (isMobile) { canvas.style.display = 'none'; return; }
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (isMobile || reduceMotion) { canvas.style.display = 'none'; return; }
         
         const ctx = canvas.getContext('2d');
         let W, H;
@@ -200,15 +201,23 @@ const APP = (() => {
             if (nowMobile && !canvas.style.display) { canvas.style.display = 'none'; ctx.clearRect(0, 0, W, H); }
             if (!nowMobile && canvas.style.display === 'none') { canvas.style.display = 'block'; }
         }
-        resize(); window.addEventListener('resize', checkMobile);
-        for (let i = 0; i < 75; i++) particles.push(new Particle());
+        resize();
+        window.addEventListener('resize', () => { resize(); checkMobile(); });
+        for (let i = 0; i < 55; i++) particles.push(new Particle());
         function connect() {
             for (let i = 0; i < particles.length; i++) for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y, d = Math.sqrt(dx * dx + dy * dy);
                 if (d < 115) { ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.strokeStyle = `rgba(0,212,255,${.13 * (1 - d / 115)})`; ctx.lineWidth = .5; ctx.stroke(); }
             }
         }
-        function loop() { ctx.clearRect(0, 0, W, H); particles.forEach(p => { p.update(); p.draw(); }); connect(); requestAnimationFrame(loop); }
+        function loop() {
+            if (!document.hidden && canvas.style.display !== 'none') {
+                ctx.clearRect(0, 0, W, H);
+                particles.forEach(p => { p.update(); p.draw(); });
+                connect();
+            }
+            requestAnimationFrame(loop);
+        }
         loop();
     }
 
@@ -232,6 +241,7 @@ const APP = (() => {
     function initHeroPointer() {
         const cursor = document.querySelector('.ai-cursor');
         if (!cursor) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth < 768) return;
 
         let x = window.innerWidth * 0.72;
         let y = window.innerHeight * 0.48;
