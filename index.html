@@ -16,63 +16,160 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=production-hardening-1" />
 </head>
 <body>
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="ai-cursor" aria-hidden="true"></div>
+  <div class="boot-screen" aria-hidden="true">
+    <div class="boot-terminal">
+      <div class="boot-terminal-bar">
+        <span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span>
+        <strong>aru.boot://candidate-profile</strong>
+      </div>
+      <div class="boot-terminal-body">
+        <span><b>$</b> aru init --assistant --profile kendall</span>
+        <span><b>&gt;</b> mounting memory: experience, projects, stack</span>
+        <span><b>&gt;</b> indexing modules: DocuMente.rag / QAPilot.agent</span>
+        <span><b>&gt;</b> connecting assistant channel: Aru AI</span>
+        <span><b>&gt;</b> rendering interface...</span>
+        <span class="boot-ready"><b>✓</b> portfolio system ready</span>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══ NAV ═══ -->
-  <nav role="navigation" aria-label="Menú principal">
+  <nav role="navigation" aria-label="Menu principal">
     <a href="#hero" class="nav-logo" aria-label="Aru.Dev">
       <img src="images/456751.webp" class="nav-avatar" alt="Aru"/>
-      <span class="nav-logo-text">Aru.Dev</span>
+      <span class="nav-logo-copy">
+        <span class="nav-logo-text">aru.dev@kendall</span>
+        <span class="nav-logo-sub">assistant kernel</span>
+      </span>
     </a>
     <ul class="nav-links">
-      <li><a href="#about"         data-key="nav-about">Sobre mí</a></li>
-      <li><a href="#skills"        data-key="nav-skills">Skills</a></li>
-      <li><a href="#experience"    data-key="nav-exp">Experiencia</a></li>
-      <li><a href="#projects"      data-key="nav-proj">Proyectos</a></li>
-      <li><a href="#certifications" data-key="nav-cert">Certs</a></li>
-      <li><a href="#contact"       data-key="nav-contact">Contacto</a></li>
+      <li><a href="#about" data-module="profile" data-key="nav-about">Sobre mi</a></li>
+      <li><a href="#skills" data-module="stack" data-key="nav-skills">Skills</a></li>
+      <li><a href="#experience" data-module="timeline" data-key="nav-exp">Experiencia</a></li>
+      <li><a href="#projects" data-module="modules" data-key="nav-proj">Proyectos</a></li>
+      <li><a href="#certifications" data-module="learn" data-key="nav-cert">Certs</a></li>
+      <li><a href="#contact" data-module="connect" data-key="nav-contact">Contacto</a></li>
     </ul>
-    <button id="lang-btn" aria-label="Cambiar idioma" onclick="APP.toggleLang()">🌐 EN</button>
+    <div class="nav-system-status"><span></span>SYSTEM ONLINE</div>
+    <button id="lang-btn" data-lang="es" aria-label="Cambiar idioma a inglés"><span>ES</span><b>EN</b></button>
   </nav>
 
   <!-- ═══ HERO ═══ -->
   <section id="hero">
     <div class="wrap">
-      <div class="hero-grid">
-        <div class="hero-text">
-          <div class="hero-eyebrow" data-key="hero-eyebrow">Disponible para nuevas oportunidades</div>
-          <h1 class="hero-name">Kendall<br>Valverde</h1>
+      <div class="hero-grid hero-terminal-os">
+        <div class="terminal-topbar">
+          <div class="terminal-window-dots">
+            <span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span>
+          </div>
+          <div class="terminal-path">aru-os://kendall/profile</div>
+          <div class="terminal-status"><span></span>Aru online</div>
+        </div>
+        <div class="terminal-grid-bg" aria-hidden="true"></div>
+        <div class="terminal-beam beam-a" aria-hidden="true"></div>
+        <div class="terminal-beam beam-b" aria-hidden="true"></div>
+        <div class="hero-text terminal-main-pane">
+          <div class="console-line muted">$ aru profile --load kendall --mode=recruiter</div>
+          <div class="console-line success">profile loaded successfully</div>
+          <div class="hero-eyebrow" data-key="hero-eyebrow">Aru assistant online</div>
+          <h1 class="hero-name"><span class="prompt-mark">&gt;</span>Kendall.Valverde<span class="name-cursor"></span></h1>
           <p class="hero-role" data-key="hero-role">Software Engineer · <em>AI-Augmented</em> Development</p>
-          <p class="hero-desc" data-key="hero-desc">Software Engineer especializado en AI-Augmented Development con 3+ años de experiencia en React, TypeScript y Node.js. Construyo agentes inteligentes open source con IA generativa: DocuMente (sistema RAG fullstack) y QAPilot (agente QA con Playwright). Líder de automatización QA reduciendo ciclos ~40%.</p>
+          <p class="hero-desc" data-key="hero-desc">Construyo agentes IA, sistemas RAG y automatizaci&oacute;n QA con React, TypeScript, Node.js, OpenAI API y Playwright. 3+ a&ntilde;os de experiencia, 10+ clientes y ciclos QA reducidos ~40%.</p>
           <div class="hero-cta">
             <a href="#projects" class="btn btn--primary" data-key="btn-projects">Ver proyectos →</a>
             <a href="#contact"  class="btn btn--outline" data-key="btn-contact">Contacto</a>
           </div>
-        </div>
-        <div class="card terminal">
-          <div class="t-bar">
-            <span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span>
-            <span class="t-title">kendall.profile.ts</span>
+          <div class="hero-signal-row" aria-label="Indicadores del perfil">
+            <span><b>RAG</b> systems</span>
+            <span><b>QA</b> agents</span>
+            <span><b>10+</b> clients</span>
           </div>
-          <div class="t-body" id="terminal-body"></div>
+        </div>
+        <div class="hero-command terminal-side-pane">
+          <div class="aru-panel card">
+            <div class="aru-head">
+              <img src="images/456751.webp" alt="Aru" />
+              <div>
+                <strong>Aru AI</strong>
+                <span><i></i> profile assistant active</span>
+              </div>
+            </div>
+            <div class="aru-dialog">
+              <p class="recruiter">Recruiter: What can Kendall build?</p>
+              <p>Aru: AI agents, RAG apps, QA automation, React systems and production-ready APIs.</p>
+            </div>
+            <div class="aru-wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="aru-tools">
+              <span>OpenAI API</span><span>Playwright</span><span>RAG</span><span>TypeScript</span>
+            </div>
+          </div>
+          <div class="card terminal">
+            <div class="t-bar">
+              <span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span>
+              <span class="t-title">aru.orchestrator.sh</span>
+            </div>
+            <div class="t-body" id="terminal-body"></div>
+          </div>
+          <div class="agent-memory-map" aria-label="Aru memory map">
+            <div class="memory-node core">Aru</div>
+            <div class="memory-node node-a">RAG</div>
+            <div class="memory-node node-b">QA</div>
+            <div class="memory-node node-c">Stack</div>
+            <div class="memory-node node-d">CV</div>
+          </div>
+          <div class="agent-status-grid">
+            <span><b>READY</b> candidate facts</span>
+            <span><b>SYNC</b> project memory</span>
+            <span><b>LIVE</b> chat channel</span>
+          </div>
+          <div class="module-strip">
+            <span>DOCUMENTE.RAG</span>
+            <span>QAPILOT.AGENT</span>
+            <span>QA.AUTOMATION</span>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="system-modules" aria-label="Módulos del sistema">
+    <div class="wrap">
+      <a href="#about" class="system-module reveal">
+        <span>profile.memory</span>
+        <strong>Sobre mí</strong>
+      </a>
+      <a href="#skills" class="system-module reveal rd1">
+        <span>skills.index</span>
+        <strong>Stack</strong>
+      </a>
+      <a href="#projects" class="system-module reveal rd2">
+        <span>projects.registry</span>
+        <strong>Proyectos</strong>
+      </a>
+      <a href="#contact" class="system-module reveal rd3">
+        <span>contact.channel</span>
+        <strong>Contacto</strong>
+      </a>
     </div>
   </section>
 
   <div class="divider"></div>
 
   <!-- ═══ ABOUT ═══ -->
-  <section id="about">
+  <section id="about" class="module-section profile-memory">
     <div class="wrap">
       <div class="sec-tag reveal" data-key="tag-about">sobre mí</div>
       <h2 class="sec-title reveal rd1" data-key="title-about">Sobre <span>mí</span></h2>
       <div class="about-grid">
         <div>
-          <div class="about-text reveal rd2">
+          <div class="about-text memory-log reveal rd2">
             <p data-key="about-p1">Soy <strong>Software Engineer</strong> especializado en AI-Augmented Development con más de <strong>3 años de experiencia</strong> en React, TypeScript y Node.js. Construyo agentes inteligentes y plataformas open source con IA generativa (OpenAI API). Bachiller en Ingeniería en Sistemas de Información y colegiado activo del <strong>CPIC</strong>.</p>
             <p data-key="about-p2">Lideré la automatización QA en <strong>Novacomp</strong> para Davivienda Bank, implementando Playwright + TypeScript con CI/CD en GitHub Actions — <strong>reduje el ciclo de prueba ~40%</strong> en un entorno bancario regulado. Asumí la dirección del equipo de QA a los 7 meses.</p>
             <p data-key="about-p3">Como freelance he atendido a <strong>más de 10 clientes</strong> en Costa Rica y EE.UU., desarrollando aplicaciones React + TypeScript, integrando OpenAI API, Anthropic SDK y arquitectura RAG. Construí desde páginas web hasta un <strong>sistema de RRHH completo</strong> que eliminó procesos 100% en papel.</p>
@@ -86,17 +183,17 @@
           </div>
         </div>
         <div class="reveal rd2">
-          <div class="card about-card">
-            <div class="card-name">Kendall Andrés Valverde Díaz</div>
-            <div class="card-role">// AI-Augmented Software Engineer</div>
+          <div class="card about-card metadata-card">
+            <div class="card-name"><span>name:</span> Kendall Andr&eacute;s Valverde D&iacute;az</div>
+            <div class="card-role"><span>role:</span> AI-Augmented Software Engineer</div>
             <ul class="info-list">
-              <li><span class="ii">📍</span><span data-key="info-loc">Costa Rica</span></li>
-              <li><span class="ii">✉</span>kendallavd@gmail.com</li>
-              <li><span class="ii">📞</span>+506 8509-7920</li>
-              <li><span class="ii">🎓</span><span data-key="info-deg">Ing. Sistemas de Información</span></li>
-              <li><span class="ii">🏛</span><span data-key="info-cpic">CPIC — Colegiado Activo</span></li>
-              <li><span class="ii">🌐</span><span data-key="info-eng">Inglés Avanzado (CCCN)</span></li>
-              <li><span class="ii">⌨</span>github.com/AruHonshou</li>
+              <li><span class="meta-key">location</span><span data-key="info-loc">Costa Rica</span></li>
+              <li><span class="meta-key">email</span>kendallavd@gmail.com</li>
+              <li><span class="meta-key">phone</span>+506 8509-7920</li>
+              <li><span class="meta-key">degree</span><span data-key="info-deg">Ing. Sistemas de Informaci&oacute;n</span></li>
+              <li><span class="meta-key">registry</span><span data-key="info-cpic">CPIC - Colegiado Activo</span></li>
+              <li><span class="meta-key">english</span><span data-key="info-eng">Ingl&eacute;s Avanzado (CCCN)</span></li>
+              <li><span class="meta-key">github</span>github.com/AruHonshou</li>
             </ul>
           </div>
         </div>
@@ -107,14 +204,14 @@
   <div class="divider"></div>
 
   <!-- ═══ SKILLS ═══ -->
-  <section id="skills" class="section-alt-bg">
+  <section id="skills" class="section-alt-bg module-section skills-index">
     <div class="wrap">
       <div class="sec-tag reveal" data-key="tag-skills">stack técnico</div>
       <h2 class="sec-title reveal rd1" data-key="title-skills">Habilidades <span>técnicas</span></h2>
       <div class="skills-grid">
         <!-- Frontend -->
         <div class="card skill-cat reveal rd1">
-          <h3 class="skill-title">⚛ Frontend</h3>
+          <h3 class="skill-title">load frontend.stack</h3>
           <div class="tags">
             <span class="chip chip--hi">React</span><span class="chip chip--hi">TypeScript</span>
             <span class="chip">JavaScript</span><span class="chip">TailwindCSS</span><span class="chip">Vite</span><span class="chip">HTML5/CSS3</span>
@@ -122,7 +219,7 @@
         </div>
         <!-- Backend -->
         <div class="card skill-cat reveal rd2">
-          <h3 class="skill-title">⚙ Backend &amp; APIs</h3>
+          <h3 class="skill-title">load backend.apis</h3>
           <div class="tags">
             <span class="chip chip--hi">Node.js</span><span class="chip chip--hi">Express</span>
             <span class="chip">NestJS</span><span class="chip">REST APIs</span><span class="chip">GraphQL</span><span class="chip">Python</span>
@@ -130,7 +227,7 @@
         </div>
         <!-- IA -->
         <div class="card skill-cat reveal rd3">
-          <h3 class="skill-title">🤖 <span data-key="skill-ai">IA &amp; Agentes</span></h3>
+          <h3 class="skill-title">load agents.ai</h3>
           <div class="tags">
             <span class="chip chip--hi">OpenAI API</span><span class="chip chip--hi">RAG</span>
             <span class="chip chip--hi">Function Calling</span>
@@ -139,7 +236,7 @@
         </div>
         <!-- QA -->
         <div class="card skill-cat reveal rd1">
-          <h3 class="skill-title">🧪 QA &amp; Testing</h3>
+          <h3 class="skill-title">load qa.automation</h3>
           <div class="tags">
             <span class="chip chip--hi">Playwright</span><span class="chip chip--hi">Selenium</span>
             <span class="chip">Jest</span><span class="chip">pytest</span><span class="chip">Postman</span><span class="chip">Swagger</span>
@@ -147,14 +244,14 @@
         </div>
         <!-- Bases de datos -->
         <div class="card skill-cat reveal rd2">
-          <h3 class="skill-title">🗄 <span data-key="skill-db">Bases de datos</span></h3>
+          <h3 class="skill-title">load data.storage</h3>
           <div class="tags">
             <span class="chip chip--hi">MySQL</span><span class="chip">SQL Server</span><span class="chip">SQLite</span>
           </div>
         </div>
         <!-- DevOps & Cloud -->
         <div class="card skill-cat reveal rd3">
-          <h3 class="skill-title">☁ DevOps &amp; Cloud</h3>
+          <h3 class="skill-title">load cloud.delivery</h3>
           <div class="tags">
             <span class="chip chip--hi">Terraform</span><span class="chip chip--hi">AWS</span><span class="chip chip--hi">Docker</span>
             <span class="chip">GitHub Actions</span><span class="chip">Git</span><span class="chip">Gunicorn</span>
@@ -167,7 +264,7 @@
   <div class="divider"></div>
 
   <!-- ═══ EXPERIENCE ═══ -->
-  <section id="experience">
+  <section id="experience" class="module-section execution-timeline">
     <div class="wrap">
       <div class="sec-tag reveal" data-key="tag-exp">trayectoria</div>
       <h2 class="sec-title reveal rd1" data-key="title-exp">Experiencia <span>profesional</span></h2>
@@ -225,7 +322,7 @@
   <div class="divider"></div>
 
   <!-- ═══ CURRENTLY BUILDING ═══ -->
-  <section id="building">
+  <section id="building" class="module-section active-process">
     <div class="wrap">
       <div class="sec-tag reveal" data-key="tag-building">en construcción</div>
       <h2 class="sec-title reveal rd1" data-key="title-building">Actualmente <span>construyendo</span></h2>
@@ -251,7 +348,7 @@
   <div class="divider" style="margin-top:5rem"></div>
 
   <!-- ═══ PROJECTS ═══ -->
-  <section id="projects" class="section-alt-bg">
+  <section id="projects" class="section-alt-bg module-section projects-registry">
     <div class="wrap">
       <div class="sec-tag reveal" data-key="tag-proj">portafolio</div>
       <h2 class="sec-title reveal rd1" data-key="title-proj">Proyectos <span>destacados</span></h2>
@@ -270,8 +367,8 @@
             <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">OpenAI API</span><span class="chip">SQLite</span><span class="chip">Docker</span>
           </div>
           <div class="proj-actions">
-            <a href="https://github.com/AruHonshou/Documente" target="_blank" class="btn btn--ghost" data-key="btn-code-doc">⌨ Ver código</a>
-            <a href="https://aruhonshou.github.io/Documente" target="_blank" class="btn btn--outline" data-key="btn-demo-doc">↗ Demo</a>
+            <a href="https://github.com/AruHonshou/Documente" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-key="btn-code-doc">⌨ Ver código</a>
+            <a href="https://aruhonshou.github.io/Documente" target="_blank" rel="noopener noreferrer" class="btn btn--outline" data-key="btn-demo-doc">↗ Demo</a>
           </div>
         </article>
         <!-- Proyecto 2: QAPilot -->
@@ -288,7 +385,7 @@
             <span class="chip">React 19</span><span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">OpenAI API</span><span class="chip">Playwright</span><span class="chip">SQLite</span>
           </div>
           <div class="proj-actions">
-            <a href="https://github.com/AruHonshou/QAPilot" target="_blank" class="btn btn--ghost" data-key="btn-code-qap">⌨ Ver código</a>
+            <a href="https://github.com/AruHonshou/QAPilot" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-key="btn-code-qap">⌨ Ver código</a>
           </div>
         </article>
         <!-- Proyecto 3: Sistema RRHH -->
@@ -305,7 +402,7 @@
             <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">MySQL</span><span class="chip">Jest</span><span class="chip">Postman</span>
           </div>
           <div class="proj-actions">
-            <a href="https://github.com/AruHonshou" target="_blank" class="btn btn--ghost" data-key="btn-code2">⌨ Ver código</a>
+            <a href="https://github.com/AruHonshou" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-key="btn-code2">⌨ Ver código</a>
           </div>
         </article>
         <!-- Proyecto 4: OpenAI Bot -->
@@ -321,8 +418,8 @@
             <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Vite</span><span class="chip">TailwindCSS</span><span class="chip">NestJS</span><span class="chip">OpenAI API</span>
           </div>
           <div class="proj-actions">
-            <a href="https://github.com/AruHonshou/OpenAIBOTFrontend" target="_blank" class="btn btn--ghost">⌨ Frontend</a>
-            <a href="https://github.com/AruHonshou/OpenAIBOTBackend" target="_blank" class="btn btn--ghost">⌨ Backend</a>
+            <a href="https://github.com/AruHonshou/OpenAIBOTFrontend" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">⌨ Frontend</a>
+            <a href="https://github.com/AruHonshou/OpenAIBOTBackend" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">⌨ Backend</a>
           </div>
         </article>
         <!-- Proyecto 5: Portfolio -->
@@ -339,8 +436,8 @@
             <span class="chip">HTML</span><span class="chip">CSS3</span><span class="chip">JavaScript</span><span class="chip">DeepSeek API</span>
           </div>
           <div class="proj-actions">
-            <a href="https://github.com/AruHonshou/aruhonshou.github.io" target="_blank" class="btn btn--ghost" data-key="btn-code3">⌨ Ver código</a>
-            <a href="https://aruhonshou.github.io" target="_blank" class="btn btn--outline" data-key="btn-demo3">↗ Demo</a>
+            <a href="https://github.com/AruHonshou/aruhonshou.github.io" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-key="btn-code3">⌨ Ver código</a>
+            <a href="https://aruhonshou.github.io" target="_blank" rel="noopener noreferrer" class="btn btn--outline" data-key="btn-demo3">↗ Demo</a>
           </div>
         </article>
       </div>
@@ -350,7 +447,7 @@
   <div class="divider"></div>
 
   <!-- ═══ CERTIFICATIONS ═══ -->
-  <section id="certifications">
+  <section id="certifications" class="module-section learning-protocols">
     <div class="wrap">
       <div class="sec-tag reveal" data-key="tag-cert">formación</div>
       <h2 class="sec-title reveal rd1" data-key="title-cert">Formación y <span>certificaciones</span></h2>
@@ -442,7 +539,7 @@
   <div class="divider"></div>
 
   <!-- ═══ CONTACT ═══ -->
-  <section id="contact">
+  <section id="contact" class="module-section connect-channel">
     <div class="wrap">
       <div class="contact-inner">
         <div class="sec-tag reveal" style="justify-content:center" data-key="tag-contact">contacto</div>
@@ -450,9 +547,9 @@
         <p class="contact-desc reveal rd2" data-key="contact-desc">Estoy disponible para posiciones fullstack, frontend, QA o roles enfocados en IA. Remoto o presencial en Costa Rica. Respondo en español e inglés.</p>
         <div class="contact-links reveal rd3">
           <a href="mailto:kendallavd@gmail.com" class="btn btn--ghost contact-link">✉ kendallavd@gmail.com</a>
-          <a href="https://wa.me/50685097920" target="_blank" class="btn btn--ghost contact-link">💬 WhatsApp</a>
-          <a href="https://github.com/AruHonshou" target="_blank" class="btn btn--ghost contact-link">⌨ GitHub</a>
-          <a href="https://www.linkedin.com/in/kendall-valverde-diaz-aru/" target="_blank" class="btn btn--ghost contact-link">💼 LinkedIn</a>
+          <a href="https://wa.me/50685097920" target="_blank" rel="noopener noreferrer" class="btn btn--ghost contact-link">💬 WhatsApp</a>
+          <a href="https://github.com/AruHonshou" target="_blank" rel="noopener noreferrer" class="btn btn--ghost contact-link">⌨ GitHub</a>
+          <a href="https://www.linkedin.com/in/kendall-valverde-diaz-aru/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost contact-link">💼 LinkedIn</a>
         </div>
       </div>
     </div>
@@ -464,12 +561,12 @@
 
   <!-- ═══ CHATBOT FAB ═══ -->
   <!-- Tooltip burbuja — aparece una sola vez -->
-  <div id="chat-tooltip" class="chat-tooltip" onclick="APP.chatbot.openChat()">
+  <div id="chat-tooltip" class="chat-tooltip" role="button" tabindex="0" aria-label="Abrir chat con Aru">
     <span class="chat-tooltip-dot"></span>
-    <span class="chat-tooltip-text">¡Habla con Aru, mi asistente! ✨</span>
-    <button class="chat-tooltip-close" onclick="event.stopPropagation();APP.chatbot.hideTooltip()" aria-label="Cerrar">×</button>
+    <span class="chat-tooltip-text">ask aru --about kendall</span>
+    <button class="chat-tooltip-close" type="button" aria-label="Cerrar">×</button>
   </div>
-  <button id="chat-fab" class="chat-fab" aria-label="Abrir chat con Aru" onclick="APP.chatbot.openChat()">
+  <button id="chat-fab" class="chat-fab" type="button" aria-label="Abrir chat con Aru">
     <img src="images/456751.webp" class="chat-fab-avatar" alt="Aru"/>
   </button>
   <div id="chat-window" class="chat-window hidden" role="dialog" aria-label="Chat con asistente IA">
@@ -481,15 +578,15 @@
           <div class="chat-header-status">Asistente de Kendall</div>
         </div>
       </div>
-      <button class="chat-close" onclick="APP.chatbot.toggle()" aria-label="Cerrar chat">✕</button>
+      <button class="chat-close" type="button" aria-label="Cerrar chat">✕</button>
     </div>
-    <div id="chat-messages" class="chat-messages"></div>
+    <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
     <div class="chat-input-area">
       <textarea id="chat-input" placeholder="Pregunta sobre Kendall..." rows="1"></textarea>
-      <button id="chat-send" onclick="APP.chatbot.sendMessage()" aria-label="Enviar mensaje">➤</button>
+      <button id="chat-send" type="button" aria-label="Enviar mensaje">➤</button>
     </div>
   </div>
 
-  <script src="main.js"></script>
+  <script src="main.js?v=production-hardening-1"></script>
 </body>
 </html>

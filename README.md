@@ -1,58 +1,50 @@
-# 👨‍💻 Kendall Valverde
+# Kendall Valverde Portfolio
 
-### Software Engineer · AI-Augmented Development
+Portfolio personal de Kendall Valverde con estetica de terminal IA, asistente Aru integrado, secciones de experiencia, proyectos, certificaciones y contacto.
 
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+## Stack
 
----
+- HTML5
+- CSS3
+- JavaScript vanilla
+- Cloudflare Worker como proxy seguro para el chat de Aru
+- GitHub Pages para publicacion
 
-## 🌍 About Me
+## Estructura
 
-> **Software Engineer from Costa Rica** 🇨🇷 | **3+ Years Experience** | **10+ Clients Worldwide**
+```txt
+index.html      Estructura principal del sitio
+styles.css      Sistema visual, responsive y animaciones
+main.js         i18n, animaciones, chatbot y eventos de UI
+images/         Avatar de Aru y recursos visuales
+```
 
-Software Engineer specialized in AI-Augmented Development with 3+ years of experience in React, TypeScript and Node.js. I build intelligent agents and open source platforms with generative AI.
+## Desarrollo local
 
-### Featured Projects
+Puedes abrir `index.html` directamente o servir el directorio con un servidor estatico:
 
-- **DocuMente** — Fullstack RAG system (document upload, embeddings, citable chat)
-- **QAPilot** — AI-powered QA agent (requirements → Playwright tests → reports)
+```bash
+npx serve .
+```
 
----
+## Publicacion
 
-## 🛠 Tech Stack
+El sitio esta preparado para GitHub Pages desde la rama `main` del repositorio:
 
-| Category | Technologies |
-|----------|-------------|
-| **Frontend** | React, TypeScript, Vite, TailwindCSS |
-| **Backend** | Node.js, Express, NestJS |
-| **AI/ML** | OpenAI API, RAG, Function Calling, Embeddings, Prompt Engineering |
-| **QA** | Playwright, Selenium, Jest, pytest, Postman |
-| **Database** | MySQL, SQL Server, SQLite |
-| **DevOps** | Git, Docker, GitHub Actions, Terraform, AWS |
+```txt
+https://aruhonshou.github.io
+```
 
----
+## Seguridad y mantenimiento
 
-## 📫 Contact
+- Los enlaces externos usan `rel="noopener noreferrer"`.
+- La API key del modelo no vive en el frontend; el navegador llama a un Worker.
+- El chat sanitiza mensajes antes de renderizarlos.
+- El cambio de idioma reinicia el contexto local del chat para evitar mezclar prompts ES/EN.
+- Hay soporte para `prefers-reduced-motion`.
 
-- **Email:** kendallavd@gmail.com
-- **Phone:** +506 8509-7920
-- **Location:** Costa Rica
-- **GitHub:** [github.com/AruHonshou](https://github.com/AruHonshou)
-- **LinkedIn:** [linkedin.com/in/kendall-valverde-diaz-aru](https://www.linkedin.com/in/kendall-valverde-diaz-aru)
+## Contacto
 
----
-
-## 🚀 View Portfolio
-
-Live: **[aruhonshou.github.io](https://aruhonshou.github.io)**
-
-*(Open `index.html` locally to see the dark mode tech version)*
-
----
-
-> *"Building software that matters, one line at a time."*
+- Email: kendallavd@gmail.com
+- GitHub: https://github.com/AruHonshou
+- LinkedIn: https://www.linkedin.com/in/kendall-valverde-diaz-aru/

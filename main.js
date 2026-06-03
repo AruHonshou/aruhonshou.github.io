@@ -9,12 +9,12 @@ const APP = (() => {
     /* ═══════════ TRANSLATIONS ═══════════ */
     const T = {
         es: {
-            'lang-btn': '🌐 EN',
+            'lang-btn': '<span>ES</span><b>EN</b>',
             'nav-about': 'Sobre mí', 'nav-skills': 'Skills', 'nav-exp': 'Experiencia',
             'nav-proj': 'Proyectos', 'nav-cert': 'Certs', 'nav-contact': 'Contacto',
-            'hero-eyebrow': 'Disponible para nuevas oportunidades',
+            'hero-eyebrow': 'Aru assistant online',
             'hero-role': 'Software Engineer · <em>AI-Augmented</em> Development',
-            'hero-desc': 'Software Engineer especializado en AI-Augmented Development con 3+ años de experiencia en React, TypeScript y Node.js. Construyo agentes inteligentes open source con IA generativa: DocuMente (sistema RAG fullstack) y QAPilot (agente QA con Playwright). Líder de automatización QA reduciendo ciclos ~40%.',
+            'hero-desc': 'Construyo agentes IA, sistemas RAG y automatizaci&oacute;n QA con React, TypeScript, Node.js, OpenAI API y Playwright. 3+ a&ntilde;os de experiencia, 10+ clientes y ciclos QA reducidos ~40%.',
             'btn-projects': 'Ver proyectos →', 'btn-contact': 'Contacto',
             'tag-about': 'sobre mí', 'tag-skills': 'stack técnico', 'tag-exp': 'trayectoria',
             'tag-building': 'en construcción', 'tag-proj': 'portafolio', 'tag-cert': 'formación', 'tag-contact': 'contacto',
@@ -62,12 +62,12 @@ const APP = (() => {
             'btn-code2': '⌨ Ver código', 'btn-code3': '⌨ Ver código', 'btn-demo3': '↗ Demo'
         },
         en: {
-            'lang-btn': '🌐 ES',
+            'lang-btn': '<span>ES</span><b>EN</b>',
             'nav-about': 'About', 'nav-skills': 'Skills', 'nav-exp': 'Experience',
             'nav-proj': 'Projects', 'nav-cert': 'Certs', 'nav-contact': 'Contact',
-            'hero-eyebrow': 'Available for new opportunities',
+            'hero-eyebrow': 'Aru assistant online',
             'hero-role': 'Software Engineer · <em>AI-Augmented</em> Development',
-            'hero-desc': 'Software Engineer specialized in AI-Augmented Development with 3+ years of experience in React, TypeScript and Node.js. I build intelligent agents and open source platforms with generative AI: DocuMente (fullstack RAG system) and QAPilot (QA agent with Playwright). QA automation leader reducing testing cycles by ~40%.',
+            'hero-desc': 'I build AI agents, RAG systems and QA automation with React, TypeScript, Node.js, OpenAI API and Playwright. 3+ years of experience, 10+ clients and QA cycles reduced by ~40%.',
             'btn-projects': 'View projects →', 'btn-contact': 'Contact',
             'tag-about': 'about me', 'tag-skills': 'tech stack', 'tag-exp': 'work history',
             'tag-building': 'in progress', 'tag-proj': 'portfolio', 'tag-cert': 'education', 'tag-contact': 'contact',
@@ -125,7 +125,11 @@ const APP = (() => {
         currentLang = lang;
         document.documentElement.lang = lang;
         const langBtn = document.getElementById('lang-btn');
-        if (langBtn) langBtn.textContent = T[lang]['lang-btn'];
+        if (langBtn) {
+            langBtn.innerHTML = T[lang]['lang-btn'];
+            langBtn.dataset.lang = lang;
+            langBtn.setAttribute('aria-label', lang === 'es' ? 'Cambiar idioma a inglés' : 'Switch language to Spanish');
+        }
 
         const navKeys = ['nav-about', 'nav-skills', 'nav-exp', 'nav-proj', 'nav-cert', 'nav-contact'];
         document.querySelectorAll('.nav-links a').forEach((a, i) => {
@@ -150,7 +154,24 @@ const APP = (() => {
     }
 
     /** Alterna entre español e inglés */
-    function toggleLang() { applyLang(currentLang === 'es' ? 'en' : 'es'); }
+    function toggleLang() {
+        applyLang(currentLang === 'es' ? 'en' : 'es');
+        chatbot.resetContext();
+    }
+
+    /**
+     * Ejecuta fetch con timeout para evitar que la interfaz quede esperando
+     * indefinidamente cuando el Worker o la red no responden.
+     */
+    async function fetchWithTimeout(url, options = {}, timeoutMs = 12000) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+        try {
+            return await fetch(url, { ...options, signal: controller.signal });
+        } finally {
+            clearTimeout(timeoutId);
+        }
+    }
 
     /**
      * Inicializa el canvas de partículas animadas en el fondo.
@@ -208,6 +229,30 @@ const APP = (() => {
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
 
+    function initHeroPointer() {
+        const cursor = document.querySelector('.ai-cursor');
+        if (!cursor) return;
+
+        let x = window.innerWidth * 0.72;
+        let y = window.innerHeight * 0.48;
+        let tx = x;
+        let ty = y;
+
+        window.addEventListener('pointermove', (event) => {
+            tx = event.clientX;
+            ty = event.clientY;
+        }, { passive: true });
+
+        function render() {
+            x += (tx - x) * 0.14;
+            y += (ty - y) * 0.14;
+            cursor.style.transform = `translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;
+            requestAnimationFrame(render);
+        }
+
+        render();
+    }
+
     /**
      * Anima la terminal del Hero con efecto typewriter.
      * Cada línea aparece secuencialmente con opacidad y desplazamiento.
@@ -215,6 +260,28 @@ const APP = (() => {
     function initTerminal() {
         const body = document.getElementById('terminal-body');
         if (!body) return;
+        {
+            const bootLines = [
+                '<span class="tc">$ aru wake --profile kendall</span>',
+                '<span class="tv">assistant:</span> online',
+                '<span class="tk">memory.sync</span> -> <span class="ts">experience: 3+ years</span>',
+                '<span class="tk">agent.load</span> -> <span class="ts">DocuMente RAG</span>',
+                '<span class="tk">agent.load</span> -> <span class="ts">QAPilot automation</span>',
+                '<span class="tk">stack.detect</span> -> <span class="ts">React, TypeScript, Node.js</span>',
+                '<span class="tk">impact.index</span> -> <span class="tv">10+ clients / QA cycle -40%</span>',
+                '<span class="tc">ready: ask Aru about Kendall</span> <span class="cursor"></span>'
+            ];
+
+            bootLines.forEach((html, i) => {
+                const div = document.createElement('div');
+                div.className = 'tl';
+                div.innerHTML = html;
+                div.style.cssText = 'opacity:0;transform:translateX(-8px);transition:opacity .28s,transform .28s';
+                body.appendChild(div);
+                setTimeout(() => { div.style.opacity = '1'; div.style.transform = 'translateX(0)'; }, 350 + i * 110);
+            });
+            return;
+        }
         const lines = [
             '<span class="tc">// Software Engineer Profile</span>',
             '<span class="tk">const</span> dev = {',
@@ -400,6 +467,13 @@ Information about Kendall:
             }
         }
 
+        /** Reinicia la memoria local del chat cuando cambia el idioma de la interfaz. */
+        function resetContext() {
+            messages = [];
+            welcomeSent = false;
+            lastMsgTime = 0;
+        }
+
         /**
          * Abre/cierra la ventana del chatbot.
          * En la primera apertura, muestra el mensaje de bienvenida.
@@ -458,11 +532,11 @@ Information about Kendall:
             messages.push({ role: 'user', content: text });
 
             try {
-                const res = await fetch(WORKER_URL, {
+                const res = await fetchWithTimeout(WORKER_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ messages, max_tokens: 300, temperature: 0.7 })
-                });
+                }, 12000);
 
                 if (!res.ok) {
                     throw new Error(`Worker responded with ${res.status}`);
@@ -501,6 +575,12 @@ Information about Kendall:
 
             } catch (err) {
                 console.error('Chatbot error:', err.message);
+                if (err.name === 'AbortError') {
+                    appendMessage('assistant', currentLang === 'es'
+                        ? 'La respuesta tardó demasiado. Puedes intentarlo otra vez en unos segundos o escribirme a kendallavd@gmail.com.'
+                        : 'The response took too long. You can try again in a few seconds or email me at kendallavd@gmail.com.');
+                    return;
+                }
                 const fallbackMsg = currentLang === 'es'
                     ? 'Hola, soy Aru 🐱 En este momento estoy tomando un café ☕ Vuelvo pronto! Mientras tanto, puedes escribirme a kendallavd@gmail.com ✉️'
                     : "Hi! I'm Aru 🐱 I'm on a coffee break ☕ Be right back! In the meantime, you can email me at kendallavd@gmail.com ✉️";
@@ -536,8 +616,41 @@ Information about Kendall:
             container.scrollTop = container.scrollHeight;
         }
 
-        return { toggle, openChat, hideTooltip, sendMessage };
+        return { toggle, openChat, hideTooltip, sendMessage, resetContext };
     })();
+
+    /** Registra eventos desde JS para evitar handlers inline en el HTML. */
+    function initDomEvents() {
+        const langBtn = document.getElementById('lang-btn');
+        const tooltip = document.getElementById('chat-tooltip');
+        const tooltipClose = document.querySelector('.chat-tooltip-close');
+        const chatFab = document.getElementById('chat-fab');
+        const chatClose = document.querySelector('.chat-close');
+        const chatSend = document.getElementById('chat-send');
+        const chatInput = document.getElementById('chat-input');
+
+        langBtn?.addEventListener('click', toggleLang);
+        tooltip?.addEventListener('click', chatbot.openChat);
+        tooltip?.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                chatbot.openChat();
+            }
+        });
+        tooltipClose?.addEventListener('click', event => {
+            event.stopPropagation();
+            chatbot.hideTooltip();
+        });
+        chatFab?.addEventListener('click', chatbot.openChat);
+        chatClose?.addEventListener('click', chatbot.toggle);
+        chatSend?.addEventListener('click', chatbot.sendMessage);
+        chatInput?.addEventListener('keydown', event => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                chatbot.sendMessage();
+            }
+        });
+    }
 
     /**
      * Punto de entrada principal.
@@ -547,7 +660,9 @@ Information about Kendall:
     function init() {
         initParticles();
         initScrollEffects();
+        initHeroPointer();
         initTerminal();
+        initDomEvents();
         updateProgressBarsLang('es');
         applyLang('es');
     }
@@ -555,4 +670,5 @@ Information about Kendall:
     return { init, toggleLang, chatbot };
 })();
 
+window.APP = APP;
 document.addEventListener('DOMContentLoaded', APP.init);
